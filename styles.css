@@ -165,3 +165,6 @@
 .section-preview-detail{width:100%;border:1px solid #d9e5df;background:#eef5f2;border-radius:5px;padding:8px;font-size:11px}
 
 .footer-credit{display:flex;flex-direction:column;gap:5px;line-height:1.5}.footer-credit strong{font-size:11px;font-weight:600;color:#526b77}
+
+.section-tile{color:var(--tile-ink,#fff)}
+.heat-legend{flex-basis:100%;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;font-size:9px;line-height:1.5;padding:5px 0}.heat-legend i{width:65px;height:7px;border-radius:3px;background:linear-gradient(90deg,#f5ecec,#8c4e59)}

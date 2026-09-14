@@ -56,7 +56,7 @@ A camada disponível contém 125 bairros em seis municípios:
 
 Nas demais cidades, os filtros e as tabelas usam os bairros cadastrados nos locais, sem desenhar limites estimados. Registros sem associação permanecem no total municipal e podem ser consultados na tabela e no mosaico.
 
-No mapa, **tons claros indicam o resultado municipal** e cores fortes indicam resultados dos bairros. A cor municipal ao fundo não estima votos para áreas sem bairros. Cinza em um bairro significa ausência de votos vinculados na base, não ausência de população.
+No mapa e no mosaico, vermelho identifica Paulo Dantas e azul identifica Rodrigo Cunha. A intensidade representa a vantagem do primeiro sobre o segundo colocado, dividida pelos votos válidos, em escala comum de 0 a 100 pontos percentuais: disputas próximas ficam claras; vantagens maiores, escuras. No primeiro turno, a comparação usa os dois mais votados de cada recorte. O verde é reservado à identidade visual e aos indicadores gerais do painel. Os municípios ao redor ficam esmaecidos para preservar o foco na cidade selecionada. A cor municipal ao fundo não estima votos para áreas sem bairros. Cinza em um bairro significa ausência de votos vinculados na base, não ausência de população.
 
 ### Perfil do eleitorado
 
