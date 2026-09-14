@@ -1,0 +1,12 @@
+{
+  "name": "atlas-eleitoral-alagoas-2022",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dashboard de dados públicos de Alagoas, governador 2022",
+  "scripts": {
+    "start": "node scripts/servir.mjs",
+    "data:download": "node scripts/baixar.mjs",
+    "build": "node scripts/publicar.mjs"
+  },
+  "author": "José Gonçalves Jr. - Cientista de Dados"
+}

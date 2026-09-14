@@ -1,0 +1,14 @@
+.deps/
+__pycache__/
+node_modules/
+_site/
+.env
+.env.*
+*.log
+dados/brutos/
+dados/*.png
+dados/*.csv
+dados/painel.json
+dados/inspecao_fontes.json
+dados/verificacao-ui.json
+.publication/

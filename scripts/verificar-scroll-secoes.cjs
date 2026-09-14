@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict');
+const {chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
+(async()=>{const b=await chromium.launch({channel:'msedge',headless:true});try{const p=await b.newPage({viewport:{width:1440,height:900}});const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:4173/?turn=2&city=28533');await p.waitForFunction(()=>window.atlas);
+ const snapshot=()=>p.evaluate(()=>({page:scrollY,grid:document.querySelector('#section-results-grid').scrollTop,max:document.querySelector('#section-results-grid').scrollHeight-document.querySelector('#section-results-grid').clientHeight,preview:!document.querySelector('#section-preview').hidden}));
+ const place=async position=>{if(await p.locator('#section-preview').isVisible())await p.keyboard.press('Escape');await p.locator('#section-results-grid').evaluate((e,position)=>{e.scrollIntoView({block:'center',behavior:'instant'});e.scrollTop=position==='end'?e.scrollHeight:position;},position);await p.waitForTimeout(350);const r=await p.locator('#section-results-grid').boundingBox();await p.mouse.move(r.x+24,r.y+100);};
+ const wheel=async delta=>{await p.mouse.wheel(0,delta);await p.waitForTimeout(100);return snapshot();};
+ await place(0);let before=await snapshot(),after=await wheel(120);assert(after.grid>before.grid);assert.equal(after.page,before.page);assert.equal(after.preview,false);
+ await place('end');before=await snapshot();after=await wheel(240);assert.equal(after.grid,after.max);assert(after.page>before.page);assert.equal(after.preview,false);
+ await place(0);before=await snapshot();after=await wheel(-240);assert.equal(after.grid,0);assert(after.page<before.page);
+ await place('end');await p.locator('#section-results-grid').evaluate(e=>e.scrollTop-=30);before=await snapshot();after=await wheel(120);assert(Math.abs(after.page-before.page-90)<2,'Excesso da roda deve continuar na página no mesmo gesto');
+ await place(0);await p.locator('.section-tile').first().hover();assert(await p.locator('#section-preview').isVisible());await p.locator('#section-preview').hover();before=await snapshot();after=await wheel(100);assert(after.grid>before.grid);assert.equal(after.preview,false);
+ await p.locator('#section-grid-search').fill('zzzinexistente');await place(0);before=await snapshot();after=await wheel(160);assert.equal(after.max,0);assert(after.page>before.page);
+ assert.deepEqual(errors,[]);console.log('Rio Largo: scroll sobre blocos e prévia, ambos os limites, excedente no mesmo gesto e lista sem overflow OK.');
+ }finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});
